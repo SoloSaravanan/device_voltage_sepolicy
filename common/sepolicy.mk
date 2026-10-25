@@ -15,6 +15,12 @@ SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += \
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
     device/voltage/sepolicy/common/private
 
+# ADB root is available only in debuggable build variants.
+ifneq ($(filter eng userdebug,$(TARGET_BUILD_VARIANT)),)
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
+    device/voltage/sepolicy/common/adbroot/private
+endif
+
 ifeq ($(TARGET_USES_PREBUILT_VENDOR_SEPOLICY), true)
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
     device/voltage/sepolicy/common/dynamic \
