@@ -25,9 +25,10 @@ BOARD_VENDOR_SEPOLICY_DIRS += \
     device/voltage/sepolicy/common/vendor
 endif
 
-ifneq ($(filter eng,$(TARGET_BUILD_VARIANT)),)
-  SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
-      device/lineage/sepolicy/common/private/adbroot_debug
+# ADB root is available only in debuggable build variants.
+ifneq ($(filter eng userdebug,$(TARGET_BUILD_VARIANT)),)
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
+    device/voltage/sepolicy/common/adbroot/private
 endif
 
 # Include atv rules on atv product
